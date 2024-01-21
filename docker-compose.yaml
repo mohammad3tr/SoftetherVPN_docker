@@ -1,0 +1,26 @@
+version: '2.4'
+
+services:
+  softether:
+    image: softethervpn/vpnserver:v4.39-9772-beta
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    cpus: 0.5
+
+    ports:
+      - 53:53
+      - 5443:443
+      - 992:992
+      - 6705:1194/udp
+      - 5555:5555
+      - 500:500/udp
+      - 4500:4500/udp
+      - 1701:1701/udp
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "./softether_data:/mnt"
+      - ./server_log:/usr/local/bin/server_log
+      - ./packet_log:/usr/local/bin/packet_log
+      - ./security_log:/usr/local/bin/security_log
